@@ -1,33 +1,32 @@
 import static java.lang.String.valueOf;
 
 public class Calculator {
-    float value;
+    float value1;
+    float value2;
+    char sign;
 
-    Calculator(float value) {
-        this.value = value;
+    Calculator(float value1, float value2, char sign) {
+        this.value1 = value1;
+        this.value2 = value2;
+        this.sign = sign;
     }
 
-    float executeAdditon(Calculator b) {
-        return this.value + b.value;
-    }
-
-    float executeSubtraction (Calculator b) {
-        return this.value + b.value;
-    }
-
-    float executeMultiplication (Calculator b) {
-        return this.value * b.value;
-    }
-
-    float executeDivision (Calculator b) {
-        return this.value / b.value;
-    }
-
-    void set (float newValue) {
-        this.value = newValue;
-    }
-
-    public String toString () {
-        return valueOf (this.value);
+    float getResult () {
+        float result = 0;
+        switch (this.sign) {
+            case '+':
+                result = value1 + value2;
+                break;
+            case '-':
+                result = value1 + value2;
+                break;
+            case '*':
+                result = value1 * value2;
+                break;
+            case '/':
+                result = value1 / value2;
+                break;
+        }
+        return result;
     }
 }

@@ -12,29 +12,11 @@ public class CalculatorOOP {
             String input = scanner.next();
             try {
                 String[] members = analyseInputString(input);
-                Calculator a = new Calculator(Float.parseFloat(members[0]));
-                Calculator b = new Calculator(Float.parseFloat(members[1]));
-                Calculator c = new Calculator(0);
-                switch (members[2].charAt(0)) {
-                    case '+':
-                        c.set(a.executeAdditon(b));
-                        break;
-                    case '-':
-                        c.set(a.executeSubtraction(b));
-                        break;
-                    case '*':
-                        c.set(a.executeMultiplication(b));
-                        break;
-                    case '/':
-                        c.set(a.executeDivision(b));
-                        break;
-                }
-
-                System.out.println(input + " = " + c.toString());
+                Calculator calc = new Calculator(Float.parseFloat(members[0]), Float.parseFloat(members[1]), members[2].charAt(0));
+                System.out.println("Result = " + String.valueOf(calc.getResult()));
                 System.out.println("Would you like to continue? Enter 'y' or 'n'.");
                 answer = scanner.next();
-
-            } catch (NullPointerException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println("Be careful inputting. Examples: 5.0+5.0, 3.2-2.3, 4.4*0, 7.4/2.8. Repeat input");
                 System.out.println();
             }
@@ -50,15 +32,13 @@ public class CalculatorOOP {
         Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            members[i] = input.substring(start,end);
+            members[i] = matcher.group();
 //            System.out.println(members[i]);
             i++;
         }
 
-        if (i > 2) {
-            throw new NullPointerException();
+        if (i != 2) {
+            throw new IllegalArgumentException("Invalid input string format!");
         }
 
         pattern = Pattern.compile("[/*+-]");
@@ -66,17 +46,17 @@ public class CalculatorOOP {
 
         i = 0;
         while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            members[2] = input.substring(start,end);
+            members[2] = matcher.group();
 //            System.out.println(members[2]);
             i++;
         }
 
-        if (i > 1) {
-            throw new NullPointerException();
+        if (i != 1) {
+            throw new IllegalArgumentException("Invalid input string format!");
         }
 
         return members;
     }
 }
+
+
