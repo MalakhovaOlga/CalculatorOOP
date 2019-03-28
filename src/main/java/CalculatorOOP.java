@@ -9,7 +9,8 @@ public class CalculatorOOP {
         System.out.println("Examples: 5.0+5.0, 3.2-2.3, 4.4*0, 7.4/2.8");
         do {
             Scanner scanner = new Scanner(System.in);
-            String input = scanner.next();
+            String input = scanner.next(); // Считывается до первого пробела
+//            System.out.println(input);
             try {
                 String[] members = analyseInputString(input);
                 Calculator calc = new Calculator(Float.parseFloat(members[0]), Float.parseFloat(members[1]), members[2].charAt(0));
@@ -30,6 +31,7 @@ public class CalculatorOOP {
 
         Pattern pattern = Pattern.compile("\\-?\\d+(\\.\\d{0,})?");
         Matcher matcher = pattern.matcher(input);
+//        System.out.println(input);
 
         while (matcher.find()) {
             members[i] = matcher.group();
@@ -50,7 +52,7 @@ public class CalculatorOOP {
 //            System.out.println(members[2]);
             i++;
         }
-
+//        System.out.println(i);
         if (i != 1) {
             throw new IllegalArgumentException("Invalid input string format!");
         }
